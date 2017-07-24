@@ -12,6 +12,8 @@ public class UIController : MonoBehaviour {
 	public PatternGenerator pGenerator;
 
 	public Text scoreText;
+	public Text bestScoreText;
+
 	public GameObject mainMenu;
 	public GameObject scoreBoard;
 	public GameObject infoMenue;
@@ -55,6 +57,8 @@ public class UIController : MonoBehaviour {
 		scoreBoard.SetActive (true);
 		infoMenue.SetActive (false);
 		mainMenu.SetActive (false);
+		bestScoreText.text = bestScore.ToString();
+		scoreText.text = score.ToString();
 		// gameManager.ResetGame ();
 	}
 
@@ -83,7 +87,6 @@ public class UIController : MonoBehaviour {
 			} else {
 				gameManager.switchToGameOver ();
 			}	
-
 		}
 	}
 	public void playStore() {
@@ -101,17 +104,5 @@ public class UIController : MonoBehaviour {
 	public int getHighScore() {
 		return bestScore;
 	}
-	public void onTouch(){
 
-		if (Input.GetMouseButtonDown (0)) {
-			//	Vector3 touchPosition = Input.GetTouch (0).position;
-			Vector3 touchPosition = Input.mousePosition;
-
-			Vector3 pos = Camera.main.ScreenToWorldPoint (touchPosition);
-			RaycastHit2D hit = Physics2D.Raycast (pos, Vector2.zero);
-			if (hit != null && hit.collider != null) {
-				Debug.Log ("I'm hitting " + hit.collider.name);
-			}
-		}
-	}
 }

@@ -27,14 +27,13 @@ public class GameManager : MonoBehaviour {
 	void Update () {
 		switch (gameState) {
 		case GAMESTATE.kMenu: {
-				updateMenuLogic ();
 				//Debug.Log("MenueState");
-				uiController.onTouch();
+				onTouch();
 			}
 			break;
 		case GAMESTATE.kIngame: {
 				//Debug.Log("IngameState");
-				uiController.onTouch ();
+				onTouch ();
 //				updateIngameLogic ();
 			}
 			break;
@@ -62,16 +61,7 @@ public class GameManager : MonoBehaviour {
 		gameState = GameManager.GAMESTATE.kGameOver;
 		ResetGame ();
 	}
-
-	private void updateMenuLogic() {
-		//uiController.switchToMainMenu ();
-		// we can add any logic for menu here. 
-	}
-
-	private void updateIngameLogic() {
-		//uiController.switchToIngameMenu ();
-	}
-
+		
 	public void ResetGame(){
 		GameObject.DestroyImmediate (levelObject);
 		uiController.slider.value = 100;
@@ -98,6 +88,24 @@ public class GameManager : MonoBehaviour {
 
 		for (int c = 0; c < animationTree.transform.childCount; c++) {
 			PauseOrPlayGameAnimation (animationTree.transform.GetChild(c).gameObject, pause);
+		}
+	}
+	public void onTouch(){
+		if (Input.GetMouseButtonDown (0)) {
+			//	Vector3 touchPosition = Input.GetTouch (0).position;
+			Vector3 touchPosition = Input.mousePosition;
+			Vector3 pos = Camera.main.ScreenToWorldPoint (touchPosition);
+			RaycastHit2D hit = Physics2D.Raycast (pos, Vector2.zero);
+			if (hit != null && hit.collider != null) {
+				if (patternGenerator.fillImage.color == hit.collider.GetComponent<SpriteRenderer> ().material.color) {
+//					Debug.Log ("Collided");
+					uiController.addScore ();
+					ResetGame ();
+					switchToIngame ();
+				} else {
+					switchToGameOver ();
+				}
+			}
 		}
 	}
 }//GameManager
