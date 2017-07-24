@@ -12,6 +12,8 @@ public class UIController : MonoBehaviour {
 	public PatternGenerator pGenerator;
 
 	public Text scoreText;
+	public Text ingameScoreText;
+
 	public Text bestScoreText;
 
 	public GameObject mainMenu;
@@ -25,8 +27,8 @@ public class UIController : MonoBehaviour {
 	public Slider slider;
 
 	// scoring systems
-	public int score=0;
-	int bestScore = 0;
+	public int score;
+	int bestScore =0;
 
 	void Start () {
 		//PlayerPrefs.SetInt ("bestScore", 0);
@@ -68,7 +70,11 @@ public class UIController : MonoBehaviour {
 		infoMenue.SetActive (true);
 		mainMenu.SetActive (false);
 	}
-
+	public void resetButtonOnClick()
+	{
+		switchToIngameMenu ();
+		score = 0;
+	}
 	public void switchVolume(){
 		if (volumeSwitch) {
 			Button buttonImage =volumeButton.gameObject.GetComponent<Button>();
@@ -88,6 +94,7 @@ public class UIController : MonoBehaviour {
 				gameManager.switchToGameOver ();
 			}	
 		}
+		ingameScoreText.text = score.ToString ();
 	}
 	public void playStore() {
 		Application.OpenURL ("market://details?id=com.example.android");
@@ -95,6 +102,7 @@ public class UIController : MonoBehaviour {
 
 	public void addScore() {
 		score++;
+		Debug.Log ("Score added" + score);
 		if (score>bestScore ) {
 			bestScore = score;
 			PlayerPrefs.SetInt ("bestScore", score);

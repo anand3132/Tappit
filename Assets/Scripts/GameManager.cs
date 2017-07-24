@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour {
 		switch (gameState) {
 		case GAMESTATE.kMenu: {
 				//Debug.Log("MenueState");
-				onTouch();
+				//onTouch();
 			}
 			break;
 		case GAMESTATE.kIngame: {
@@ -65,7 +65,6 @@ public class GameManager : MonoBehaviour {
 	public void ResetGame(){
 		GameObject.DestroyImmediate (levelObject);
 		uiController.slider.value = 100;
-		uiController.score = 0;
 		paused = false;
 	}
 
@@ -106,6 +105,7 @@ public class GameManager : MonoBehaviour {
 					switchToGameOver ();
 				}
 			}
+			Debug.Log ("Score" + uiController.score);
 		}
 	}
 }//GameManager
