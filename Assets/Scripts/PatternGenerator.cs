@@ -14,8 +14,7 @@ public class PatternGenerator : MonoBehaviour {
 
 	public GameObject LoadLevel(int level){
 		Object tempObj;
-		switch(level)
-		{
+		switch(level){
 		case 1:
 			tempObj = Resources.Load("Prefab/Level_1");
 			break;
@@ -97,17 +96,6 @@ public class PatternGenerator : MonoBehaviour {
 			}
 			itr++;
 		}
-
-//		if (_obj != null) {
-//			 currentLevel = (GameObject)GameObject.Instantiate (_obj, transform);
-//		
-//			foreach ( SpriteRenderer sr in GetComponentsInChildren<SpriteRenderer>()) {
-//				Color rnd = Random.ColorHSV (0f, 1f, 0f, 1f, 0f, 1f);
-//				sr.material.color = rnd;
-//				Fill.color=rnd;
-//			}
-//		}
-
 		return currentLevel;
 	}
 }

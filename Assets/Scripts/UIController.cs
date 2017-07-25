@@ -63,9 +63,6 @@ public class UIController : MonoBehaviour {
 		mainMenu.SetActive (false);
 		bestScoreText.text = bestScore.ToString();
 		scoreText.text = score.ToString();
-		// gameManager.ResetGame ();
-		gameManager.redBG.SetActive (false);
-
 	}
 
 	public void switchToInfoMenu() {

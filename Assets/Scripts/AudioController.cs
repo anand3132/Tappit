@@ -10,7 +10,6 @@ public class AudioController : MonoBehaviour {
 	public static AudioController instance = null;
 	public float highPitchRange = 1.05f;
 	public float lowPitchRange =.95f;
-
 	public AudioClip bGMusic;
 
 	void Awake(){

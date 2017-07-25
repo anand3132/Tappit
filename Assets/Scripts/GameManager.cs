@@ -4,6 +4,7 @@ using UnityEngine;
 
 // This class is used to controll the flow of our game.
 // Created By Anand.A
+
 public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
@@ -13,17 +14,19 @@ public class GameManager : MonoBehaviour {
 		kGameOver,
 		kMaxState
 	}
+
 	// controller references.
 	public UIController uiController;
 	public PatternGenerator patternGenerator;
 	public CameraShake cameraShake;
-	GAMESTATE gameState = GAMESTATE.kMenu;
-	GameObject levelObject = null;
-	private bool paused = false;
 
+	// Audio Clip references.
 	public AudioClip clickSound;
 	public AudioClip gameOverSound;
-	public GameObject redBG;
+
+	private bool paused = false;
+	GAMESTATE gameState = GAMESTATE.kMenu;
+	GameObject levelObject = null;
 
 	public GAMESTATE GetGameState() {
 		return gameState;
@@ -32,14 +35,11 @@ public class GameManager : MonoBehaviour {
 	void Update () {
 		switch (gameState) {
 		case GAMESTATE.kMenu: {
-				//Debug.Log("MenueState");
-				//onTouch();
+
 			}
 			break;
 		case GAMESTATE.kIngame: {
-				//Debug.Log("IngameState");
 				onTouch ();
-//				updateIngameLogic ();
 			}
 			break;
 		case GAMESTATE.kGameOver: {
@@ -50,7 +50,6 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void switchToIngame() {
-		//audioController.PlayBGMusic();
 		gameState = GAMESTATE.kIngame;
 		levelObject = patternGenerator.LoadLevel (Random.Range(1, 5));
 	}
@@ -64,10 +63,8 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void switchToGameOver() {
-		redBG.SetActive (true);
 		gameState = GameManager.GAMESTATE.kGameOver;
 		AudioController.instance.PlaySFX (gameOverSound);
-
 		ResetGame ();
 	}
 		
