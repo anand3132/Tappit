@@ -24,7 +24,7 @@ public class UIController : MonoBehaviour {
 
 	public GameObject volumeButton;
 	public GameObject playPauseButton;
-	public bool volumeSwitch = true;
+	public bool volumeSwitch =true;
 	public CameraShake cameraShake;
 
 	// scoring systems
@@ -32,15 +32,15 @@ public class UIController : MonoBehaviour {
 	int bestScore = 0;
 
 	void Start () {
-		// PlayerPrefs.SetInt ("bestScore", 0);
 		resetInGameUI();
 	}
 
 	public void resetInGameUI() {
-		score = 0;
+		// PlayerPrefs.SetInt ("bestScore", 0);
 		bestScore = PlayerPrefs.GetInt ("bestScore");
 		slider = gameMenue.GetComponentInChildren<Slider> ();
 		slider.value = 100f;
+		score = 0;
 	}
 
 	public void switchToMainMenu() {
@@ -104,6 +104,7 @@ public class UIController : MonoBehaviour {
 			volumeButtonImage.image.sprite = Resources.Load<Sprite>("volume-active");
 			audioController.playOrstopSound ();
 			volumeSwitch = true;
+
 		}
 	}
 
@@ -130,7 +131,7 @@ public class UIController : MonoBehaviour {
 	}
 
 	public void playStore() {
-		Application.OpenURL ("market://search?q=<query>");
+		Application.OpenURL ("market://details?id=air.org.axisentertainment.BabyHazelKitchenTime");
 	}
 
 	public void addScore() {
