@@ -25,6 +25,9 @@ public class PatternGenerator : MonoBehaviour {
 		case 3:
 			tempObj = Resources.Load("Prefab/Level_3");
 			break;
+		case 4:
+			tempObj = Resources.Load("Prefab/Level_4");
+			break;
 		default:
 			tempObj = Resources.Load("Prefab/Level_3");
 			break;

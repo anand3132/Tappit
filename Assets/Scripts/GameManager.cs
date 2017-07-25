@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour {
 	public void switchToIngame() {
 		//audioController.PlayBGMusic();
 		gameState = GAMESTATE.kIngame;
-		levelObject = patternGenerator.LoadLevel (Random.Range(1, 4));
+		levelObject = patternGenerator.LoadLevel (Random.Range(1, 5));
 	}
 
 	public void switchToMenu() {

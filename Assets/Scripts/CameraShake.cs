@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraShake : MonoBehaviour {
-	public float min = 0.02f;
-	public float max = 0.03f;
+	public float min=0f;
+	public float max=0f;
 	float duration = 0f;
 	Vector3 initialPosition;
 
@@ -13,12 +13,12 @@ public class CameraShake : MonoBehaviour {
 		duration = 0.3f;
 		initialPosition = transform.position;
 		min=transform.position.x;
-		max=transform.position.x+3;
+		max=transform.position.x+1;
 	}
 
 	void Update () {
 		if (duration > 0) {
-			gameObject.transform.position = new Vector3 (Mathf.PingPong (Time.time * 30f, max - min), transform.position.y, transform.position.z);
+			gameObject.transform.position = new Vector3 (Mathf.PingPong (Time.time * 15f, max - min), transform.position.y, transform.position.z);
 			duration-=Time.deltaTime;
 		}
 
