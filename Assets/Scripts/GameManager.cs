@@ -6,7 +6,6 @@ using UnityEngine;
 // Created By Anand.A
 
 public class GameManager : MonoBehaviour {
-
 	// Use this for initialization
 	public enum GAMESTATE {
 		kMenu,
@@ -35,15 +34,15 @@ public class GameManager : MonoBehaviour {
 	void Update () {
 		switch (gameState) {
 		case GAMESTATE.kMenu: {
-
+				// Not added any logic so far.
 			}
 			break;
 		case GAMESTATE.kIngame: {
-				onTouch ();
+				updateIngame ();
 			}
 			break;
 		case GAMESTATE.kGameOver: {
-				uiController.switchToScoreBoard ();
+				// Not added any logic so far.
 			}
 			break;
 		}
@@ -65,6 +64,7 @@ public class GameManager : MonoBehaviour {
 	public void switchToGameOver() {
 		gameState = GameManager.GAMESTATE.kGameOver;
 		AudioController.instance.PlaySFX (gameOverSound);
+		uiController.switchToScoreBoard ();
 		ResetGame ();
 	}
 		
@@ -76,7 +76,7 @@ public class GameManager : MonoBehaviour {
 
 	public void PausePlayIngame() {
 		paused = !paused;
-		Debug.Log ("Pause " + paused);
+		//Debug.Log ("Pause " + paused);
 		PauseOrPlayGameAnimation(levelObject, paused);
 	}
 
@@ -95,9 +95,14 @@ public class GameManager : MonoBehaviour {
 			PauseOrPlayGameAnimation (animationTree.transform.GetChild(c).gameObject, pause);
 		}
 	}
-	public void onTouch(){
+	public void updateIngame() {
+
+		
 		if (Input.GetMouseButtonDown (0)) {
-			//	Vector3 touchPosition = Input.GetTouch (0).position;
+					if (IsIngamePaused () ) {
+						return;
+					}
+			// check if player clicked on the correct symbol or not.
 			Vector3 touchPosition = Input.mousePosition;
 			Vector3 pos = Camera.main.ScreenToWorldPoint (touchPosition);
 			RaycastHit2D hit = Physics2D.Raycast (pos, Vector2.zero);
@@ -108,10 +113,21 @@ public class GameManager : MonoBehaviour {
 					ResetGame ();
 					switchToIngame ();
 				} else {
-					switchToGameOver ();
+					// shake the camera for wrong click
+					if (!cameraShake.IsShaking () && !cameraShake.IsShakeFinished ()) {
+						cameraShake.StartShake ();
+						PausePlayIngame ();
+
+					}
 				}
 			}
-			Debug.Log ("Score" + uiController.score);
+		}
+
+		// if there is a camera shake then check for camera shake animation finished.
+		// TODO : Need to introduce two more states WIN & LOSE to clean this up.
+		if (cameraShake.IsShakeFinished ()) {
+			cameraShake.RestCameraShake ();
+			switchToGameOver ();
 		}
 	}
 }//GameManager

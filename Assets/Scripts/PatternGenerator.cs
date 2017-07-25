@@ -70,7 +70,6 @@ public class PatternGenerator : MonoBehaviour {
 			}
 			if (!found) {
 				colorIndices.Add (randIndex);
-//				Debug.Log ("index (" + (colorIndices.Count-1) +") " + randIndex);
 				presetColorCounter--;
 			}
 			overflowCounter++;

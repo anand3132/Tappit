@@ -14,8 +14,8 @@ public class UIController : MonoBehaviour {
 
 	public Text scoreText;
 	public Text ingameScoreText;
-
 	public Text bestScoreText;
+	public Slider slider;
 
 	public GameObject mainMenu;
 	public GameObject scoreBoard;
@@ -23,20 +23,23 @@ public class UIController : MonoBehaviour {
 	public GameObject gameMenue;
 
 	public GameObject volumeButton;
-	public bool volumeSwitch=true;
+	public GameObject playPauseButton;
+	public bool volumeSwitch = true;
 	public CameraShake cameraShake;
-
-	public Slider slider;
 
 	// scoring systems
 	public int score;
-	int bestScore =0;
+	int bestScore = 0;
 
 	void Start () {
-		//PlayerPrefs.SetInt ("bestScore", 0);
+		// PlayerPrefs.SetInt ("bestScore", 0);
+		resetInGameUI();
+	}
+
+	public void resetInGameUI() {
 		score = 0;
 		bestScore = PlayerPrefs.GetInt ("bestScore");
-		slider= gameMenue.GetComponentInChildren<Slider> ();
+		slider = gameMenue.GetComponentInChildren<Slider> ();
 		slider.value = 100f;
 	}
 
@@ -46,6 +49,7 @@ public class UIController : MonoBehaviour {
 		scoreBoard.SetActive (false);
 		infoMenue.SetActive (false);
 		mainMenu.SetActive (true);
+		resetInGameUI ();
 	}
 
 	public void switchToIngameMenu() {
@@ -71,23 +75,35 @@ public class UIController : MonoBehaviour {
 		infoMenue.SetActive (true);
 		mainMenu.SetActive (false);
 	}
-	public void resetButtonOnClick()
-	{
+
+	public void resetButtonOnClick() {
+		Button playPausebuttonImage = playPauseButton.gameObject.GetComponent<Button>();
 		switchToIngameMenu ();
 		score = 0;
+		playPausebuttonImage.image.sprite = Resources.Load<Sprite> ("play");
 	}
-	public void switchVolume(){
-		if (volumeSwitch) {
-			Button buttonImage =volumeButton.gameObject.GetComponent<Button>();
-			buttonImage.image.sprite = Resources.Load<Sprite>("volume-in-active");
-			volumeSwitch = false;
-			audioController.playOrstopSound ();
-		} else {
-			Button buttonImage =volumeButton.gameObject.GetComponent<Button>();
-			buttonImage.image.sprite = Resources.Load<Sprite>("volume-active");		
-			volumeSwitch = true;
-			audioController.playOrstopSound ();
 
+	public void PlayPauseButtonClicked() {
+		gameManager.PausePlayIngame ();	// Toggle pause/play game
+
+		Button playPausebuttonImage = playPauseButton.gameObject.GetComponent<Button>();
+		if (gameManager.IsIngamePaused ()) {
+			playPausebuttonImage.image.sprite = Resources.Load<Sprite> ("pause");
+		} else {
+			playPausebuttonImage.image.sprite = Resources.Load<Sprite> ("play");
+		}
+	}
+
+	public void switchVolume() {
+		Button volumeButtonImage = volumeButton.gameObject.GetComponent<Button>();
+		if (volumeSwitch) {
+			volumeButtonImage.image.sprite = Resources.Load<Sprite>("volume-in-active");
+			audioController.playOrstopSound ();
+			volumeSwitch = false;
+		} else {
+			volumeButtonImage.image.sprite = Resources.Load<Sprite>("volume-active");
+			audioController.playOrstopSound ();
+			volumeSwitch = true;
 		}
 	}
 
@@ -98,6 +114,7 @@ public class UIController : MonoBehaviour {
 					slider.value -= 50.0f * Time.deltaTime;
 				}
 			} else {
+				// TODO : Try to use WIN & LOSE state so that we can move this code inside GameManager.
 				// start the camera shake here.
 				if (!cameraShake.IsShaking () && !cameraShake.IsShakeFinished ()) {
 					cameraShake.StartShake ();
@@ -113,7 +130,7 @@ public class UIController : MonoBehaviour {
 	}
 
 	public void playStore() {
-		Application.OpenURL ("market://details?id=com.example.android");
+		Application.OpenURL ("market://search?q=<query>");
 	}
 
 	public void addScore() {
