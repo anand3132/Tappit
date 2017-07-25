@@ -30,7 +30,6 @@ public class CameraShake : MonoBehaviour {
 		if (duration < 0) {
 			gameObject.transform.position = initialPosition;
 			redBG.SetActive (false);
-
 		}
 	}
 

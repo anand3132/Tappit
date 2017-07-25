@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine.Audio;
 using UnityEngine;
 
+// This class is used to controll the Audio of our game..
+// Created By Anand.A
+
 public class AudioController : MonoBehaviour {
 	public AudioSource bgMSource;
 	public AudioSource effectSource;
