@@ -25,22 +25,22 @@ public class AudioController : MonoBehaviour {
 		PlayBGM (bGMusic);
 	}
 
-	public void playOrstopSound() {
+	public void PlayOrstopSound() {
 		bgMSource.mute = !bgMSource.mute;
 		effectSource.mute = !effectSource.mute;
 	}
 
-	public void PlayBGM(AudioClip _clip) {
+	public void PlayBGM(AudioClip bGMClip) {
 		bgMSource.loop = true;
-		bgMSource.clip = _clip;
+		bgMSource.clip = bGMClip;
 		bgMSource.Play ();
 	}
 
-	public void PlaySFX(params AudioClip [] _clips) {
-		int randomIndex = Random.Range (0, _clips.Length);
+	public void PlaySFX(params AudioClip [] sFXClip) {
+		int randomIndex = Random.Range (0, sFXClip.Length);
 		float randomPitch = Random.Range (lowPitchRange, highPitchRange);
 		effectSource.pitch = randomPitch;
-		effectSource.clip = _clips [randomIndex];
+		effectSource.clip = sFXClip [randomIndex];
 		effectSource.Play ();
 	}
 }

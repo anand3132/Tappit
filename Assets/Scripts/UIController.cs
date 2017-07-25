@@ -32,10 +32,10 @@ public class UIController : MonoBehaviour {
 	int bestScore = 0;
 
 	void Start () {
-		resetInGameUI();
+		ResetInGameUI();
 	}
 
-	public void resetInGameUI() {
+	public void ResetInGameUI() {
 		// PlayerPrefs.SetInt ("bestScore", 0);
 		bestScore = PlayerPrefs.GetInt ("bestScore");
 		slider = gameMenue.GetComponentInChildren<Slider> ();
@@ -43,24 +43,24 @@ public class UIController : MonoBehaviour {
 		score = 0;
 	}
 
-	public void switchToMainMenu() {
-		gameManager.switchToMenu ();
+	public void SwitchToMainMenu() {
+		gameManager.SwitchToMenu ();
 		gameMenue.SetActive (false);
 		scoreBoard.SetActive (false);
 		infoMenue.SetActive (false);
 		mainMenu.SetActive (true);
-		resetInGameUI ();
+		ResetInGameUI ();
 	}
 
-	public void switchToIngameMenu() {
-		gameManager.switchToIngame ();
+	public void SwitchToIngameMenu() {
+		gameManager.SwitchToIngame ();
 		gameMenue.SetActive (true);
 		scoreBoard.SetActive (false);
 		infoMenue.SetActive (false);
 		mainMenu.SetActive (false);
 	} 
 
-	public void switchToScoreBoard() {
+	public void SwitchToScoreBoard() {
 		gameMenue.SetActive (false);
 		scoreBoard.SetActive (true);
 		infoMenue.SetActive (false);
@@ -69,16 +69,16 @@ public class UIController : MonoBehaviour {
 		scoreText.text = score.ToString();
 	}
 
-	public void switchToInfoMenu() {
+	public void SwitchToInfoMenu() {
 		gameMenue.SetActive (false);
 		scoreBoard.SetActive (false);
 		infoMenue.SetActive (true);
 		mainMenu.SetActive (false);
 	}
 
-	public void resetButtonOnClick() {
+	public void ResetButtonOnClick() {
 		Button playPausebuttonImage = playPauseButton.gameObject.GetComponent<Button>();
-		switchToIngameMenu ();
+		SwitchToIngameMenu ();
 		score = 0;
 		playPausebuttonImage.image.sprite = Resources.Load<Sprite> ("play");
 	}
@@ -94,15 +94,15 @@ public class UIController : MonoBehaviour {
 		}
 	}
 
-	public void switchVolume() {
+	public void SwitchVolume() {
 		Button volumeButtonImage = volumeButton.gameObject.GetComponent<Button>();
 		if (volumeSwitch) {
 			volumeButtonImage.image.sprite = Resources.Load<Sprite>("volume-in-active");
-			audioController.playOrstopSound ();
+			audioController.PlayOrstopSound ();
 			volumeSwitch = false;
 		} else {
 			volumeButtonImage.image.sprite = Resources.Load<Sprite>("volume-active");
-			audioController.playOrstopSound ();
+			audioController.PlayOrstopSound ();
 			volumeSwitch = true;
 
 		}
@@ -122,7 +122,7 @@ public class UIController : MonoBehaviour {
 				} else {
 					if (cameraShake.IsShakeFinished ()) {
 						cameraShake.RestCameraShake ();
-						gameManager.switchToGameOver ();
+						gameManager.SwitchToGameOver ();
 					}
 				}
 			}	
@@ -130,20 +130,19 @@ public class UIController : MonoBehaviour {
 		ingameScoreText.text = score.ToString ();
 	}
 
-	public void playStore() {
+	public void PlayStore() {
 		Application.OpenURL ("market://details?id=air.org.axisentertainment.BabyHazelKitchenTime");
 	}
 
-	public void addScore() {
+	public void AddScore() {
 		score++;
-		Debug.Log ("Score added" + score);
 		if (score>bestScore ) {
 			bestScore = score;
 			PlayerPrefs.SetInt ("bestScore", score);
 		}
 	}
 
-	public int getHighScore() {
+	public int GetHighScore() {
 		return bestScore;
 	}
 

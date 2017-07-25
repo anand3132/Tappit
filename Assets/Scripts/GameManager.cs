@@ -48,12 +48,12 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
-	public void switchToIngame() {
+	public void SwitchToIngame() {
 		gameState = GAMESTATE.kIngame;
 		levelObject = patternGenerator.LoadLevel (Random.Range(1, 5));
 	}
 
-	public void switchToMenu() {
+	public void SwitchToMenu() {
 		if (levelObject != null) {
 			GameObject.DestroyImmediate (levelObject);
 		}
@@ -61,10 +61,10 @@ public class GameManager : MonoBehaviour {
 		gameState = GAMESTATE.kMenu;
 	}
 
-	public void switchToGameOver() {
+	public void SwitchToGameOver() {
 		gameState = GameManager.GAMESTATE.kGameOver;
 		AudioController.instance.PlaySFX (gameOverSound);
-		uiController.switchToScoreBoard ();
+		uiController.SwitchToScoreBoard ();
 		ResetGame ();
 	}
 		
@@ -109,9 +109,9 @@ public class GameManager : MonoBehaviour {
 			if (hit != null && hit.collider != null) {
 				if (patternGenerator.fillImage.color == hit.collider.GetComponent<SpriteRenderer> ().material.color) {
 					AudioController.instance.PlaySFX(clickSound);
-					uiController.addScore ();
+					uiController.AddScore ();
 					ResetGame ();
-					switchToIngame ();
+					SwitchToIngame ();
 				} else {
 					// shake the camera for wrong click
 					if (!cameraShake.IsShaking () && !cameraShake.IsShakeFinished ()) {
@@ -127,7 +127,7 @@ public class GameManager : MonoBehaviour {
 		// TODO : Need to introduce two more states WIN & LOSE to clean this up.
 		if (cameraShake.IsShakeFinished ()) {
 			cameraShake.RestCameraShake ();
-			switchToGameOver ();
+			SwitchToGameOver ();
 		}
 	}
 }//GameManager
