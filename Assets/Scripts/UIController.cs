@@ -10,6 +10,7 @@ public class UIController : MonoBehaviour {
 	// gui components
 	public GameManager gameManager;
 	public PatternGenerator pGenerator;
+	public AudioController audioController;
 
 	public Text scoreText;
 	public Text ingameScoreText;
@@ -21,6 +22,7 @@ public class UIController : MonoBehaviour {
 	public GameObject infoMenue;
 	public GameObject gameMenue;
 
+	public GameObject redBG;
 	public GameObject volumeButton;
 	public bool volumeSwitch=true;
 
@@ -78,12 +80,15 @@ public class UIController : MonoBehaviour {
 	public void switchVolume(){
 		if (volumeSwitch) {
 			Button buttonImage =volumeButton.gameObject.GetComponent<Button>();
-			buttonImage.image.sprite = Resources.Load<Sprite>("volume-in-active");		
+			buttonImage.image.sprite = Resources.Load<Sprite>("volume-in-active");
 			volumeSwitch = false;
+			audioController.playOrstopSound ();
 		} else {
 			Button buttonImage =volumeButton.gameObject.GetComponent<Button>();
 			buttonImage.image.sprite = Resources.Load<Sprite>("volume-active");		
 			volumeSwitch = true;
+			audioController.playOrstopSound ();
+
 		}
 	}
 	void FixedUpdate(){

@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour {
 	GameObject levelObject = null;
 	private bool paused = false;
 
+	public AudioClip clickSound;
+	public AudioClip gameOverSound;
 	public GAMESTATE GetGameState() {
 		return gameState;
 	}
@@ -45,6 +47,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void switchToIngame() {
+		//audioController.PlayBGMusic();
 		gameState = GAMESTATE.kIngame;
 		levelObject = patternGenerator.LoadLevel (Random.Range(1, 4));
 	}
@@ -59,6 +62,7 @@ public class GameManager : MonoBehaviour {
 
 	public void switchToGameOver() {
 		gameState = GameManager.GAMESTATE.kGameOver;
+		AudioController.instance.PlaySFX (gameOverSound);
 		ResetGame ();
 	}
 		
@@ -97,7 +101,7 @@ public class GameManager : MonoBehaviour {
 			RaycastHit2D hit = Physics2D.Raycast (pos, Vector2.zero);
 			if (hit != null && hit.collider != null) {
 				if (patternGenerator.fillImage.color == hit.collider.GetComponent<SpriteRenderer> ().material.color) {
-//					Debug.Log ("Collided");
+					AudioController.instance.PlaySFX(clickSound);
 					uiController.addScore ();
 					ResetGame ();
 					switchToIngame ();
