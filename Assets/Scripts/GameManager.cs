@@ -16,12 +16,15 @@ public class GameManager : MonoBehaviour {
 	// controller references.
 	public UIController uiController;
 	public PatternGenerator patternGenerator;
+	public CameraShake cameraShake;
 	GAMESTATE gameState = GAMESTATE.kMenu;
 	GameObject levelObject = null;
 	private bool paused = false;
 
 	public AudioClip clickSound;
 	public AudioClip gameOverSound;
+	public GameObject redBG;
+
 	public GAMESTATE GetGameState() {
 		return gameState;
 	}
@@ -61,8 +64,10 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void switchToGameOver() {
+		redBG.SetActive (true);
 		gameState = GameManager.GAMESTATE.kGameOver;
 		AudioController.instance.PlaySFX (gameOverSound);
+
 		ResetGame ();
 	}
 		
@@ -78,7 +83,7 @@ public class GameManager : MonoBehaviour {
 		PauseOrPlayGameAnimation(levelObject, paused);
 	}
 
-	private bool IsIngamePaused() {
+	public bool IsIngamePaused() {
 		return paused;
 	}
 

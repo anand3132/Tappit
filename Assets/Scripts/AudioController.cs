@@ -17,23 +17,23 @@ public class AudioController : MonoBehaviour {
 		if (instance == null)
 			instance = this;
 		else if(instance!=this)
-		{
 			Destroy (gameObject);
-		}
+		
 		DontDestroyOnLoad (gameObject);
 		PlayBGM (bGMusic);
 	}
 
 	public void playOrstopSound(){
-		bgMSource.mute = !bgMSource.mute;
-		effectSource.mute = !effectSource.mute;
-
+			bgMSource.mute = !bgMSource.mute;
+			effectSource.mute = !effectSource.mute;
 	}
+
 	public void PlayBGM(AudioClip _clip){
 		bgMSource.loop = true;
 		bgMSource.clip = _clip;
 		bgMSource.Play ();
 	}
+
 	public void PlaySFX(params AudioClip [] _clips){
 		int randomIndex = Random.Range (0, _clips.Length);
 		float randomPitch = Random.Range (lowPitchRange, highPitchRange);

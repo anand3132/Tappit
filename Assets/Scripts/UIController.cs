@@ -22,9 +22,9 @@ public class UIController : MonoBehaviour {
 	public GameObject infoMenue;
 	public GameObject gameMenue;
 
-	public GameObject redBG;
 	public GameObject volumeButton;
 	public bool volumeSwitch=true;
+	public CameraShake cameraShake;
 
 	public Slider slider;
 
@@ -64,6 +64,8 @@ public class UIController : MonoBehaviour {
 		bestScoreText.text = bestScore.ToString();
 		scoreText.text = score.ToString();
 		// gameManager.ResetGame ();
+		gameManager.redBG.SetActive (false);
+
 	}
 
 	public void switchToInfoMenu() {
@@ -91,16 +93,28 @@ public class UIController : MonoBehaviour {
 
 		}
 	}
+
 	void FixedUpdate(){
 		if (gameManager.GetGameState() == GameManager.GAMESTATE.kIngame) {
-			if (slider.value > 1) {
-				slider.value -= 1f;					
+			if (slider.value > 1.0f) {
+				if (!gameManager.IsIngamePaused ()) {
+					slider.value -= 50.0f * Time.deltaTime;
+				}
 			} else {
-				gameManager.switchToGameOver ();
+				// start the camera shake here.
+				if (!cameraShake.IsShaking () && !cameraShake.IsShakeFinished ()) {
+					cameraShake.StartShake ();
+				} else {
+					if (cameraShake.IsShakeFinished ()) {
+						cameraShake.RestCameraShake ();
+						gameManager.switchToGameOver ();
+					}
+				}
 			}	
 		}
 		ingameScoreText.text = score.ToString ();
 	}
+
 	public void playStore() {
 		Application.OpenURL ("market://details?id=com.example.android");
 	}

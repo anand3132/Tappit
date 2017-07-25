@@ -6,7 +6,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{3AA475F3-ECB7-84EE-CAB0-D22CFF787A87}</ProjectGuid>
+    <ProjectGuid>{76FD0BB4-1853-4646-6ED5-381F624DCA4A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp-Editor</AssemblyName>
@@ -121,13 +121,13 @@
  <HintPath>/Applications/Unity/Unity.app/Contents/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll</HintPath>
  </Reference>
  <Reference Include="Google.IOSResolver_v1.2.31.0">
- <HintPath>/Users/arun/Anand/1Localrep/1Live/TestColor/Assets/PlayServicesResolver/Editor/Google.IOSResolver_v1.2.31.0.dll</HintPath>
+ <HintPath>/Users/arun/Anand/1Localrep/1Live/Tappit/Assets/PlayServicesResolver/Editor/Google.IOSResolver_v1.2.31.0.dll</HintPath>
  </Reference>
  <Reference Include="Google.JarResolver_v1.2.31.0">
- <HintPath>/Users/arun/Anand/1Localrep/1Live/TestColor/Assets/PlayServicesResolver/Editor/Google.JarResolver_v1.2.31.0.dll</HintPath>
+ <HintPath>/Users/arun/Anand/1Localrep/1Live/Tappit/Assets/PlayServicesResolver/Editor/Google.JarResolver_v1.2.31.0.dll</HintPath>
  </Reference>
  <Reference Include="Google.VersionHandler_v1.2.31.0">
- <HintPath>/Users/arun/Anand/1Localrep/1Live/TestColor/Assets/PlayServicesResolver/Editor/Google.VersionHandler_v1.2.31.0.dll</HintPath>
+ <HintPath>/Users/arun/Anand/1Localrep/1Live/Tappit/Assets/PlayServicesResolver/Editor/Google.VersionHandler_v1.2.31.0.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.iOS.Extensions.Xcode">
  <HintPath>/Applications/Unity/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
@@ -138,7 +138,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp.csproj">
-      <Project>{41063FEF-1007-D097-9C6E-A6DB9F3097BE}</Project>      <Name>Assembly-CSharp</Name>    </ProjectReference>
+      <Project>{4D71D02A-C3CA-E9B9-109B-F58936786D3F}</Project>      <Name>Assembly-CSharp</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
